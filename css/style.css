@@ -1,0 +1,424 @@
+/* ==========================================================================
+   KidGenius Club — Bono 2: Rompecabezas & Puzzles Didácticos
+   Design System & Stylesheet
+   ========================================================================== */
+
+:root {
+  /* KidGenius Color Palette Tokens */
+  --kg-purple-dark: #221245;
+  --kg-purple-main: #35206F;
+  --kg-purple-light: #4B2C99;
+  --kg-purple-soft: #554A6D;
+  --kg-purple-card: rgba(53, 32, 111, 0.85);
+
+  --kg-green-main: #7AC943;
+  --kg-green-dark: #4F9A25;
+  --kg-green-light: #98E062;
+
+  --kg-blue-main: #38A9E8;
+  --kg-blue-dark: #2077B8;
+  --kg-blue-light: #70C5F5;
+
+  --kg-orange-main: #FF8A25;
+  --kg-orange-dark: #D4660C;
+  --kg-orange-light: #FFA658;
+
+  --kg-yellow-main: #FFC928;
+  --kg-yellow-dark: #D9A00A;
+  --kg-yellow-light: #FFE071;
+
+  --kg-pink-main: #FF5E8E;
+  --kg-pink-dark: #D82F63;
+
+  --kg-bg-gradient: linear-gradient(135deg, #1d0f3b 0%, #35206f 50%, #201140 100%);
+  --kg-card-bg: rgba(255, 255, 255, 0.95);
+  --kg-card-dark: rgba(35, 20, 75, 0.75);
+
+  --font-heading: 'Fredoka', cursive, sans-serif;
+  --font-body: 'Nunito', sans-serif;
+
+  --shadow-cartoon: 0 8px 0px rgba(0, 0, 0, 0.25);
+  --shadow-button-green: 0 6px 0px var(--kg-green-dark);
+  --shadow-button-blue: 0 6px 0px var(--kg-blue-dark);
+  --shadow-button-orange: 0 6px 0px var(--kg-orange-dark);
+  --shadow-button-yellow: 0 6px 0px var(--kg-yellow-dark);
+  --shadow-button-purple: 0 6px 0px #21114a;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: var(--kg-bg-gradient);
+  color: #2D3748;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background animated stars & bubbles */
+.bg-decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-star {
+  position: absolute;
+  color: rgba(255, 201, 40, 0.35);
+  animation: floatAround 14s infinite ease-in-out;
+}
+
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-25px) rotate(180deg) scale(1.15); }
+}
+
+/* Typography */
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+}
+
+.font-nunito {
+  font-family: var(--font-body);
+}
+
+/* 3D Kid-Friendly Cartoon Buttons */
+.btn-kg {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  border-radius: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.12s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn-kg:active {
+  transform: translateY(4px);
+}
+
+.btn-kg-green {
+  background: linear-gradient(180deg, var(--kg-green-light) 0%, var(--kg-green-main) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-button-green), 0 10px 20px rgba(122, 201, 67, 0.3);
+}
+.btn-kg-green:active {
+  box-shadow: 0 2px 0px var(--kg-green-dark);
+}
+
+.btn-kg-blue {
+  background: linear-gradient(180deg, var(--kg-blue-light) 0%, var(--kg-blue-main) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-button-blue), 0 10px 20px rgba(56, 169, 232, 0.3);
+}
+.btn-kg-blue:active {
+  box-shadow: 0 2px 0px var(--kg-blue-dark);
+}
+
+.btn-kg-orange {
+  background: linear-gradient(180deg, var(--kg-orange-light) 0%, var(--kg-orange-main) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-button-orange), 0 10px 20px rgba(255, 138, 37, 0.3);
+}
+.btn-kg-orange:active {
+  box-shadow: 0 2px 0px var(--kg-orange-dark);
+}
+
+.btn-kg-yellow {
+  background: linear-gradient(180deg, var(--kg-yellow-light) 0%, var(--kg-yellow-main) 100%);
+  color: #4A3305;
+  text-shadow: none;
+  box-shadow: var(--shadow-button-yellow), 0 10px 20px rgba(255, 201, 40, 0.3);
+}
+.btn-kg-yellow:active {
+  box-shadow: 0 2px 0px var(--kg-yellow-dark);
+}
+
+.btn-kg-purple {
+  background: linear-gradient(180deg, #623db8 0%, var(--kg-purple-light) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-button-purple), 0 10px 20px rgba(75, 44, 153, 0.3);
+}
+.btn-kg-purple:active {
+  box-shadow: 0 2px 0px #21114a;
+}
+
+/* Glassmorphism Containers */
+.kg-glass {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+.kg-glass-dark {
+  background: rgba(45, 25, 95, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 3px solid rgba(150, 110, 240, 0.35);
+  border-radius: 2rem;
+  box-shadow: 0 20px 40px rgba(10, 4, 30, 0.45);
+  color: #ffffff;
+}
+
+/* Island & World Map Nodes */
+.world-island {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.world-island:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.level-node {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  cursor: pointer;
+}
+.level-node:hover {
+  transform: scale(1.12);
+}
+.level-node:active {
+  transform: scale(0.95);
+}
+
+.level-unlocked {
+  background: linear-gradient(135deg, #FFE071 0%, #FFC928 100%);
+  color: #4A3305;
+  box-shadow: 0 6px 0px #D9A00A, 0 10px 20px rgba(255, 201, 40, 0.4);
+  border: 3px solid #FFF5C0;
+}
+
+.level-completed {
+  background: linear-gradient(135deg, #98E062 0%, #7AC943 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 0px #4F9A25, 0 10px 20px rgba(122, 201, 67, 0.4);
+  border: 3px solid #E1FFC0;
+}
+
+.level-locked {
+  background: #645785;
+  color: #9E93BE;
+  box-shadow: 0 6px 0px #3F345D;
+  border: 3px solid #786D98;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/* Jigsaw Canvas & Snap Pieces */
+.puzzle-board {
+  touch-action: none;
+  position: relative;
+  background: #f0edfa;
+  border: 4px dashed #a08dd3;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: inset 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.puzzle-piece {
+  position: absolute;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
+  transition: transform 0.1s ease, filter 0.2s ease;
+  z-index: 10;
+}
+.puzzle-piece:active, .puzzle-piece.dragging {
+  cursor: grabbing;
+  transform: scale(1.08);
+  filter: drop-shadow(0 14px 18px rgba(0,0,0,0.35));
+  z-index: 100 !important;
+}
+.puzzle-piece.placed {
+  cursor: default;
+  filter: none;
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+/* Slide Puzzle Grid */
+.slide-grid {
+  display: grid;
+  gap: 8px;
+  background: #35206f;
+  padding: 12px;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.slide-tile {
+  background: linear-gradient(135deg, #ffffff 0%, #f0ebff 100%);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--kg-purple-main);
+  box-shadow: 0 6px 0px #b8a2e8, 0 8px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+.slide-tile:hover {
+  transform: translateY(-2px);
+}
+.slide-tile:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0px #b8a2e8;
+}
+.slide-tile.empty {
+  background: rgba(255,255,255,0.08);
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+  cursor: default;
+}
+
+/* Math Reveal Game */
+.math-cell {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  border: 2px solid #D8D1F0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #35206F;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.math-cell.revealed {
+  border: none;
+  cursor: default;
+}
+
+.math-option-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F1FF 100%);
+  border: 3px solid #BCA8F2;
+  border-radius: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #35206F;
+  box-shadow: 0 6px 0px #9782D4, 0 10px 15px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.math-option-card:hover {
+  transform: translateY(-3px) scale(1.04);
+  border-color: var(--kg-green-main);
+}
+.math-option-card:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0px #9782D4;
+}
+
+/* Avatar Cards */
+.avatar-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 4px solid transparent;
+  border-radius: 1.75rem;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.avatar-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.25);
+}
+.avatar-card.selected {
+  border-color: var(--kg-yellow-main);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px #FFC928, 0 16px 30px rgba(255, 201, 40, 0.4);
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* Diploma Styles */
+.diploma-frame {
+  background: #FFFDF5;
+  border: 12px double #D4AF37;
+  border-radius: 2rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(212, 175, 55, 0.15);
+  position: relative;
+}
+
+/* Animations */
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-bounce-soft {
+  animation: bounceSoft 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 201, 40, 0.6)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255, 201, 40, 0.95)); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop {
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(35, 20, 75, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--kg-purple-light);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--kg-green-main);
+}

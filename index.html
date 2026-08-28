@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>KidGenius Club — Bono 2: Rompecabezas & Puzzles Didácticos</title>
+  <meta name="description" content="KidGenius Club Bono 2: Rompecabezas interactivos, puzzles de lógica matemática y tangram de dinosaurios para niños de 6 a 12 años con Geni, Dino y sus amigos." />
+
+  <!-- Google Fonts: Fredoka & Nunito (Exact same typography as Math Dino & KidGenius Club) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN for speedy responsive layout -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Custom KidGenius Club Design System -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-yellow-300 selection:text-purple-950">
+
+  <!-- Background Floating Visuals -->
+  <div class="bg-decorations">
+    <div class="floating-star text-3xl" style="top: 10%; left: 8%;">⭐</div>
+    <div class="floating-star text-4xl" style="top: 25%; right: 12%; animation-delay: -3s;">✨</div>
+    <div class="floating-star text-2xl" style="top: 75%; left: 15%; animation-delay: -7s;">🌟</div>
+    <div class="floating-star text-3xl" style="top: 80%; right: 10%; animation-delay: -5s;">🦕</div>
+    <div class="floating-star text-2xl" style="top: 50%; left: 4%; animation-delay: -2s;">🦖</div>
+    <div class="floating-star text-3xl" style="top: 45%; right: 4%; animation-delay: -9s;">🌴</div>
+  </div>
+
+  <!-- Header Navigation Bar -->
+  <header class="relative z-30 w-full px-4 py-3 bg-purple-950/80 backdrop-blur-md border-b-2 border-purple-800/60 shadow-xl">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+      
+      <!-- Brand Logo & Home Button -->
+      <button id="btnHomeMap" class="flex items-center gap-2 sm:gap-3 cursor-pointer group text-left border-none bg-transparent p-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-green-500 to-yellow-300 flex items-center justify-center text-2xl shadow-lg transform group-hover:scale-105 transition-transform">
+          🦖
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs uppercase tracking-widest font-black text-yellow-300 font-heading">KIDGENIUS CLUB</span>
+            <span class="text-[10px] bg-pink-600 text-white px-2 py-0.2 rounded-full font-black">BONO 2</span>
+          </div>
+          <h1 class="text-base sm:text-xl font-black text-white font-heading leading-none">
+            Dino Puzzles & Rompecabezas
+          </h1>
+        </div>
+      </button>
+
+      <!-- Stats Bar (Stars, Coins, Avatar, Audio) -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        
+        <!-- Stars Counter -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 font-heading shadow-inner">
+          <span class="text-base sm:text-lg">⭐</span>
+          <span id="headerStars" class="text-sm sm:text-base font-black">0</span>
+        </div>
+
+        <!-- Coins Counter -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-orange-400/20 border border-orange-400/40 text-orange-300 font-heading shadow-inner">
+          <span class="text-base sm:text-lg">🪙</span>
+          <span id="headerCoins" class="text-sm sm:text-base font-black">0</span>
+        </div>
+
+        <!-- Active Avatar Widget -->
+        <button id="btnOpenAvatar" title="Cambiar Mascota y Voz" class="flex items-center gap-2 px-2.5 py-1.5 rounded-2xl bg-purple-800/80 hover:bg-purple-700/90 border border-purple-600 transition-all cursor-pointer shadow-md">
+          <div id="headerAvatarIcon" class="w-8 h-8 rounded-full overflow-hidden bg-purple-900 flex items-center justify-center">
+            🌟
+          </div>
+          <span id="headerChildName" class="text-xs font-black text-white hidden md:inline font-heading max-w-[90px] truncate">
+            Campeón
+          </span>
+        </button>
+
+        <!-- Sound & Music Toggles -->
+        <div class="flex items-center gap-1">
+          <button id="btnToggleSound" title="Efectos de Sonido" class="w-9 h-9 rounded-xl bg-purple-900/80 hover:bg-purple-800 text-white flex items-center justify-center transition-colors shadow-inner border border-purple-700 cursor-pointer">
+            <span class="icon text-sm">🔊</span>
+          </button>
+          <button id="btnToggleMusic" title="Música de Fondo" class="w-9 h-9 rounded-xl bg-purple-900/80 hover:bg-purple-800 text-white flex items-center justify-center transition-colors shadow-inner border border-purple-700 cursor-pointer">
+            <span class="icon text-sm">🎵</span>
+          </button>
+        </div>
+
+        <!-- Math Dino App Link -->
+        <a href="https://mathdino.89.116.29.168.sslip.io/" target="_blank" rel="noopener noreferrer" title="Ir a la App Principal Math Dino" class="btn-kg btn-kg-green text-xs py-1.5 px-3 hidden lg:flex">
+          <span>🦖</span> Math Dino
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Router Container -->
+  <main id="appMainView" class="relative z-10 flex-1 flex flex-col items-center justify-center p-4 sm:p-6 w-full max-w-6xl mx-auto my-4">
+    <!-- Dynamic World Map or Active Game loads here -->
+    <div class="flex flex-col items-center justify-center text-center p-12 text-white animate-pulse">
+      <span class="text-5xl mb-3">🦖</span>
+      <p class="text-lg font-bold font-heading">Cargando el Valle de Rompecabezas KidGenius...</p>
+    </div>
+  </main>
+
+  <!-- Footer Banner -->
+  <footer class="relative z-20 w-full py-3 px-4 bg-purple-950/90 border-t border-purple-800/40 text-center">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-purple-300 font-nunito font-bold">
+      <div class="flex items-center gap-2">
+        <span>🎁 Bono 2 Oficial KidGenius Club</span>
+        <span class="hidden sm:inline">•</span>
+        <span class="text-yellow-300">Rompecabezas • Agilidad Mental • Diplomas</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://mathdino.89.116.29.168.sslip.io/" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-300 transition-colors">
+          App Math Dino ↗
+        </a>
+        <span>•</span>
+        <span>© 2026 KidGenius Club. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dynamic Modal Overlay Container -->
+  <div id="modalContainer"></div>
+
+  <!-- JavaScript ES Modules -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
