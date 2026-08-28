@@ -1,32 +1,37 @@
-# Bono 2: KidGenius Club — Dino Puzzles & Rompecabezas Didácticos
+# 🦖 KidGenius Club — Bono #3: Calendario de Aventuras (30 Días)
 
-Aplicación web interactiva de **Rompecabezas y Puzzles Didácticos** de la suite **KidGenius Club**, diseñada para niños de 6 a 12 años junto a **Geni**, **Dino Aventurero**, **Dinosauria**, **Rexy** y **Tricy**.
-
----
-
-## 🦖 Características Principales
-
-- **4 Modos de Juego**:
-  - 🧩 **Dino Jigsaw Puzzles**: Rompecabezas interactivos con arrastre táctil / mouse y encaje magnético.
-  - 🦖➕ **Rompecabezas Matemático**: Resuelve sumas, restas y multiplicaciones para revelar la imagen del dinosaurio.
-  - 🧩 **Deslizador Jurásico (Slide Puzzle)**: Deslizador 3x3 y 4x4 con números y fósiles.
-  - 📐 **Tangram Jurásico**: Encaje de formas geométricas básicas en la silueta.
-- **Identidad de Marca KidGenius**:
-  - Tipografías oficiales `Fredoka` y `Nunito`.
-  - Mascotas con saludos de voz y citas motivacionales.
-  - Generador de **Diploma Oficial** descargable e imprimible en PDF.
-  - Audio Engine nativo con Web Audio API (efectos de sonido y melodía infantil).
-- **Gamificación**: Estrellas ⭐, Monedas 🪙, Rachas y Mapa de 4 Mundos Prehistóricos.
+Aplicación interactiva y generador de materiales imprimibles correspondiente al **Bono #3** de la oferta oficial de lanzamiento de **KidGenius Club**.
 
 ---
 
-## 🚀 Despliegue y Ejecución Local
+## 🌟 Características Principales
 
-Esta aplicación es una Single Page Application (SPA) estática optimizada para ejecutarse en cualquier navegador o servidor web como Nginx, Caddy, Coolify, GitHub Pages, Vercel o Netlify.
+- **🎨 Identidad Visual Oficial**: Tipografías `Fredoka` y `Nunito`, paleta de colores oficial KidGenius (`#7AC943`, `#35206F`, `#FFC928`, etc.) y estética lúdica con la mascota guía **Geni**.
+- **📅 Calendario Interactivo de 30 Días**:
+  - **Semana 1**: Exploradores de Números
+  - **Semana 2**: Maestros del Cálculo Rápido
+  - **Semana 3**: Guardianes de la Geometría y Patrones
+  - **Semana 4**: Campeones KidGenius y Gran Desafío Final
+- **🔊 Motor de Audio Web Audio API**: Sonidos matemáticos dinámicos de victoria, fanfarria, pop y switch de volumen.
+- **🖨️ Centro de Impresión Alta Resolución**:
+  - Plantilla Póster de 30 días para pared/nevera en formato horizontal A4 / Carta con casillas de marcado.
+  - Generador dinámico del **Diploma Oficial de Superación KidGenius** con nombre del niño/a y fecha de graduación.
+- **💾 Persistencia**: Guardado en `localStorage` de rachas, días completados, estrellas y perfiles personalizados.
+- **🚀 Listo para Producción**: Empaquetado con Docker Nginx alpine ultra-rápido.
 
-### Ejecución Local:
+---
+
+## 💻 Ejecución Local
+
+Puedes abrir `index.html` directamente en tu navegador o ejecutar un servidor estático:
+
 ```bash
-# Con cualquier servidor estático:
 npx serve .
-# O abrir directamente index.html en tu navegador.
+```
+
+O utilizando Docker:
+
+```bash
+docker build -t bono3-kidgenius .
+docker run -p 8080:80 bono3-kidgenius
 ```

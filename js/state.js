@@ -1,170 +1,159 @@
-/**
- * KidGenius State Store
- * Handles progress, user profiles, levels unlocked, stars, coins, and local persistence
- */
+/* KidGenius Club - Bono #3: Calendario de Aventuras
+   Módulo de Estado Global y Persistencia de Perfiles */
 
-const STORAGE_KEY = 'kidgenius_bono2_progress';
-
-const defaultState = {
-  profile: {
-    firstName: '',
-    parentEmail: '',
-    avatarId: 'geni',
-    isRegistered: false
-  },
-  stats: {
-    stars: 0,
-    coins: 0,
-    streakDays: 1,
-    puzzlesSolved: 0,
-    mathAnswered: 0
-  },
-  levels: {
-    // world_mode_level: { completed: true, stars: 3, bestTime: 45 }
-    'valle_jigsaw_1': { completed: false, stars: 0, unlocked: true },
-    'valle_jigsaw_2': { completed: false, stars: 0, unlocked: false },
-    'valle_math_1': { completed: false, stars: 0, unlocked: true },
-    'valle_math_2': { completed: false, stars: 0, unlocked: false },
-    'valle_slide_1': { completed: false, stars: 0, unlocked: true },
-    'valle_tangram_1': { completed: false, stars: 0, unlocked: true },
-
-    'selva_jigsaw_1': { completed: false, stars: 0, unlocked: false },
-    'selva_math_1': { completed: false, stars: 0, unlocked: false },
-    'selva_slide_1': { completed: false, stars: 0, unlocked: false },
-    'selva_tangram_1': { completed: false, stars: 0, unlocked: false },
-
-    'volcan_jigsaw_1': { completed: false, stars: 0, unlocked: false },
-    'volcan_math_1': { completed: false, stars: 0, unlocked: false },
-    'volcan_slide_1': { completed: false, stars: 0, unlocked: false },
-
-    'diamante_jigsaw_1': { completed: false, stars: 0, unlocked: false },
-    'diamante_math_1': { completed: false, stars: 0, unlocked: false }
-  },
-  diplomas: [],
-  settings: {
-    soundMuted: false,
-    musicEnabled: true,
-    difficulty: 'normal'
-  }
-};
-
-class StateStore {
+class AppState {
   constructor() {
-    this.state = this.loadState();
-    this.listeners = [];
+    this.STORAGE_KEY = 'kidgenius_bono3_adventure_data';
+    this.data = this.loadData();
   }
 
-  loadState() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        return { ...defaultState, ...JSON.parse(saved) };
-      }
-    } catch (e) {
-      console.warn('Could not read state from localStorage', e);
-    }
-    return JSON.parse(JSON.stringify(defaultState));
-  }
-
-  saveState() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
-      this.notify();
-    } catch (e) {
-      console.warn('Could not write state to localStorage', e);
-    }
-  }
-
-  subscribe(listener) {
-    this.listeners.push(listener);
-    return () => {
-      this.listeners = this.listeners.filter(l => l !== listener);
+  getDefaultData() {
+    return {
+      currentProfileId: 'profile_default',
+      profiles: [
+        {
+          id: 'profile_default',
+          name: 'Pequeño Genio',
+          avatar: '🦖',
+          stars: 0,
+          streak: 1,
+          completedDays: [], // array de números [1, 2, 3...]
+          unlockedStickers: [],
+          lastCompletedDate: null,
+          createdDate: new Date().toISOString()
+        }
+      ]
     };
   }
 
-  notify() {
-    this.listeners.forEach(fn => fn(this.state));
-  }
-
-  // --- Profile Actions ---
-  setProfile(firstName, parentEmail, avatarId) {
-    this.state.profile.firstName = firstName.trim();
-    this.state.profile.parentEmail = parentEmail.trim();
-    this.state.profile.avatarId = avatarId || 'geni';
-    this.state.profile.isRegistered = true;
-    this.saveState();
-  }
-
-  setAvatar(avatarId) {
-    this.state.profile.avatarId = avatarId;
-    this.saveState();
-  }
-
-  // --- Progress Actions ---
-  completeLevel(levelKey, earnedStars = 3, earnedCoins = 50) {
-    if (!this.state.levels[levelKey]) {
-      this.state.levels[levelKey] = { completed: false, stars: 0, unlocked: true };
-    }
-
-    const current = this.state.levels[levelKey];
-    if (!current.completed) {
-      this.state.stats.puzzlesSolved += 1;
-      this.state.stats.coins += earnedCoins;
-      this.state.stats.stars += earnedStars;
-      current.completed = true;
-      current.stars = Math.max(current.stars, earnedStars);
-    } else {
-      if (earnedStars > current.stars) {
-        this.state.stats.stars += (earnedStars - current.stars);
-        current.stars = earnedStars;
+  loadData() {
+    try {
+      const saved = localStorage.getItem(this.STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved);
       }
-      this.state.stats.coins += Math.floor(earnedCoins / 2);
+    } catch (e) {
+      console.error('Error loading state from localStorage', e);
     }
-
-    // Auto-unlock next levels
-    this.unlockNextLevels(levelKey);
-    this.saveState();
+    return this.getDefaultData();
   }
 
-  unlockNextLevels(currentKey) {
-    const levelOrder = [
-      'valle_jigsaw_1', 'valle_math_1', 'valle_slide_1', 'valle_tangram_1', 'valle_jigsaw_2', 'valle_math_2',
-      'selva_jigsaw_1', 'selva_math_1', 'selva_slide_1', 'selva_tangram_1',
-      'volcan_jigsaw_1', 'volcan_math_1', 'volcan_slide_1',
-      'diamante_jigsaw_1', 'diamante_math_1'
-    ];
+  saveData() {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+    } catch (e) {
+      console.error('Error saving state to localStorage', e);
+    }
+  }
 
-    const idx = levelOrder.indexOf(currentKey);
-    if (idx >= 0 && idx + 1 < levelOrder.length) {
-      const nextKey = levelOrder[idx + 1];
-      if (!this.state.levels[nextKey]) {
-        this.state.levels[nextKey] = { completed: false, stars: 0, unlocked: true };
+  getCurrentProfile() {
+    let profile = this.data.profiles.find(p => p.id === this.data.currentProfileId);
+    if (!profile) {
+      profile = this.data.profiles[0];
+      this.data.currentProfileId = profile.id;
+      this.saveData();
+    }
+    return profile;
+  }
+
+  setProfileName(newName) {
+    const profile = this.getCurrentProfile();
+    profile.name = newName.trim() || 'Pequeño Genio';
+    this.saveData();
+  }
+
+  setProfileAvatar(newAvatar) {
+    const profile = this.getCurrentProfile();
+    profile.avatar = newAvatar;
+    this.saveData();
+  }
+
+  addProfile(name, avatar) {
+    const id = 'profile_' + Date.now();
+    const newProfile = {
+      id,
+      name: name || 'Pequeño Genio',
+      avatar: avatar || '🦕',
+      stars: 0,
+      streak: 1,
+      completedDays: [],
+      unlockedStickers: [],
+      lastCompletedDate: null,
+      createdDate: new Date().toISOString()
+    };
+    this.data.profiles.push(newProfile);
+    this.data.currentProfileId = id;
+    this.saveData();
+    return newProfile;
+  }
+
+  switchProfile(profileId) {
+    if (this.data.profiles.some(p => p.id === profileId)) {
+      this.data.currentProfileId = profileId;
+      this.saveData();
+    }
+  }
+
+  isDayCompleted(dayNumber) {
+    const profile = this.getCurrentProfile();
+    return profile.completedDays.includes(dayNumber);
+  }
+
+  completeDay(dayNumber, sticker) {
+    const profile = this.getCurrentProfile();
+    if (!profile.completedDays.includes(dayNumber)) {
+      profile.completedDays.push(dayNumber);
+      profile.stars += 3;
+
+      if (sticker && !profile.unlockedStickers.includes(sticker)) {
+        profile.unlockedStickers.push(sticker);
+      }
+
+      // Actualizar racha
+      const todayStr = new Date().toDateString();
+      if (profile.lastCompletedDate) {
+        const lastDate = new Date(profile.lastCompletedDate);
+        const diffDays = Math.floor((new Date(todayStr) - lastDate) / (1000 * 60 * 60 * 24));
+        if (diffDays === 1) {
+          profile.streak += 1;
+        } else if (diffDays > 1) {
+          profile.streak = 1;
+        }
       } else {
-        this.state.levels[nextKey].unlocked = true;
+        profile.streak = 1;
+      }
+      profile.lastCompletedDate = todayStr;
+
+      this.saveData();
+      return true;
+    }
+    return false;
+  }
+
+  getProgressPercentage() {
+    const profile = this.getCurrentProfile();
+    return Math.round((profile.completedDays.length / 30) * 100);
+  }
+
+  getNextActiveDay() {
+    const profile = this.getCurrentProfile();
+    for (let day = 1; day <= 30; day++) {
+      if (!profile.completedDays.includes(day)) {
+        return day;
       }
     }
-  }
-
-  addMathAnswer(isCorrect) {
-    if (isCorrect) {
-      this.state.stats.mathAnswered += 1;
-      this.state.stats.coins += 5;
-      this.saveState();
-    }
-  }
-
-  awardDiploma(worldName) {
-    if (!this.state.diplomas.includes(worldName)) {
-      this.state.diplomas.push(worldName);
-      this.state.stats.coins += 100;
-      this.saveState();
-    }
+    return 30;
   }
 
   resetProgress() {
-    this.state = JSON.parse(JSON.stringify(defaultState));
-    this.saveState();
+    const profile = this.getCurrentProfile();
+    profile.completedDays = [];
+    profile.stars = 0;
+    profile.streak = 1;
+    profile.unlockedStickers = [];
+    profile.lastCompletedDate = null;
+    this.saveData();
   }
 }
 
-export const store = new StateStore();
+window.appState = new AppState();

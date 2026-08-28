@@ -1,0 +1,334 @@
+/* KidGenius Club - Bono #3: Calendario de Aventuras
+   Estilos específicos del tablero y calendario interactivo de 30 días */
+
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Barra de progreso global del reto */
+.challenge-progress-card {
+  background: var(--kg-white);
+  border-radius: var(--kg-radius);
+  padding: 24px 28px;
+  border: 2px solid rgba(53, 32, 111, 0.06);
+  box-shadow: var(--kg-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.progress-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--kg-morado);
+}
+
+.progress-title .trophy-icon {
+  color: var(--kg-amarillo-dark);
+  font-size: 24px;
+}
+
+.progress-percentage {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--kg-verde-dark);
+  background: var(--kg-verde-light);
+  padding: 4px 14px;
+  border-radius: var(--kg-radius-full);
+}
+
+.progress-bar-container {
+  height: 18px;
+  background: var(--kg-crema-dark);
+  border-radius: var(--kg-radius-full);
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(53, 32, 111, 0.06);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--kg-amarillo) 0%, var(--kg-verde) 100%);
+  border-radius: var(--kg-radius-full);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  animation: shineProgress 2s infinite;
+}
+
+@keyframes shineProgress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* Semanas Temáticas */
+.week-container {
+  background: var(--kg-white);
+  border-radius: var(--kg-radius-lg);
+  padding: 28px;
+  border: 3px solid rgba(53, 32, 111, 0.06);
+  box-shadow: var(--kg-shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.week-container:hover {
+  box-shadow: var(--kg-shadow);
+  border-color: rgba(53, 32, 111, 0.12);
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 2px dashed var(--kg-crema-dark);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.week-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.week-badge {
+  padding: 8px 16px;
+  border-radius: var(--kg-radius-full);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.week-1 .week-badge { background: var(--kg-verde-light); color: var(--kg-verde-dark); }
+.week-2 .week-badge { background: var(--kg-azul-light); color: var(--kg-azul-dark); }
+.week-3 .week-badge { background: var(--kg-amarillo-light); color: var(--kg-amarillo-dark); }
+.week-4 .week-badge { background: var(--kg-naranja-light); color: var(--kg-naranja-dark); }
+
+.week-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--kg-morado);
+}
+
+.week-subtitle {
+  font-size: 14px;
+  color: var(--kg-gray);
+  font-weight: 600;
+}
+
+.week-badge-status {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--kg-gray);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Rejilla de días (7 días por fila o responsive) */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+/* Tarjeta del Día Individual */
+.day-card {
+  background: var(--kg-crema);
+  border-radius: var(--kg-radius);
+  border: 3px solid rgba(53, 32, 111, 0.08);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  min-height: 160px;
+  justify-content: space-between;
+}
+
+.day-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--kg-shadow);
+  border-color: var(--kg-amarillo-dark);
+}
+
+/* Estados del Día */
+.day-card.completed {
+  background: linear-gradient(135deg, #f2faea 0%, #e2f5d2 100%);
+  border-color: var(--kg-verde);
+  box-shadow: 0 4px 12px rgba(122, 201, 67, 0.2);
+}
+
+.day-card.today {
+  border-color: var(--kg-naranja);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 138, 37, 0.25), var(--kg-shadow-sm);
+  animation: pulseToday 2s infinite ease-in-out;
+}
+
+@keyframes pulseToday {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(255, 138, 37, 0.25), var(--kg-shadow-sm); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 138, 37, 0.4), var(--kg-shadow); }
+}
+
+.day-card.locked {
+  opacity: 0.75;
+  background: #f7f5fa;
+  border-color: #e4e0ec;
+  cursor: pointer;
+}
+
+.day-card.locked:hover {
+  opacity: 1;
+  border-color: var(--kg-morado-2);
+}
+
+.day-number-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--kg-morado-light);
+  color: var(--kg-morado);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  border: 2px solid transparent;
+}
+
+.day-card.completed .day-number-badge {
+  background: var(--kg-verde);
+  color: var(--kg-white);
+}
+
+.day-card.today .day-number-badge {
+  background: var(--kg-naranja);
+  color: var(--kg-white);
+}
+
+.day-icon {
+  font-size: 32px;
+  margin: 6px 0;
+  transition: transform 0.2s ease;
+}
+
+.day-card:hover .day-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.day-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--kg-morado);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.day-status-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--kg-radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+}
+
+.day-card.completed .day-status-pill {
+  background: var(--kg-verde);
+  color: var(--kg-white);
+}
+
+.day-card.today .day-status-pill {
+  background: var(--kg-naranja-light);
+  color: var(--kg-naranja-dark);
+}
+
+.day-card.locked .day-status-pill {
+  background: var(--kg-gray-light);
+  color: var(--kg-gray);
+}
+
+.day-stamp {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+}
+
+/* Fila especial para el Gran Día 30 */
+.day-card.grand-finale {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #fff7db 0%, #ffe999 100%);
+  border: 3px solid var(--kg-amarillo-dark);
+  flex-direction: row;
+  padding: 20px 28px;
+  min-height: auto;
+  gap: 20px;
+}
+
+.day-card.grand-finale .finale-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.day-card.grand-finale .finale-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .days-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .day-card.grand-finale {
+    flex-direction: column;
+    text-align: center;
+  }
+  .day-card.grand-finale .finale-right {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,275 @@
+/* KidGenius Club - Bono #3: Calendario de Aventuras
+   Estilos de los mini-desafíos matemáticos y modales de juego */
+
+/* Modal de Misión Diaria */
+.mission-modal-header {
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.mission-day-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--kg-amarillo-light);
+  color: var(--kg-amarillo-dark);
+  border: 2px solid var(--kg-amarillo);
+  padding: 6px 16px;
+  border-radius: var(--kg-radius-full);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.mission-title {
+  font-size: 26px;
+  color: var(--kg-morado);
+  font-weight: 700;
+}
+
+.mission-story-box {
+  background: var(--kg-morado-light);
+  border-radius: var(--kg-radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-left: 5px solid var(--kg-morado);
+}
+
+.mission-geni-mini {
+  font-size: 38px;
+  flex-shrink: 0;
+}
+
+.mission-story-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--kg-morado);
+  line-height: 1.4;
+}
+
+/* Área de interacción del reto */
+.mission-game-arena {
+  background: var(--kg-crema);
+  border-radius: var(--kg-radius);
+  border: 3px solid rgba(53, 32, 111, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.math-question-large {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--kg-morado);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.visual-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 440px;
+}
+
+.visual-item {
+  font-size: 34px;
+  animation: popItem 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+@keyframes popItem {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Opciones de respuesta */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.option-btn {
+  background: var(--kg-white);
+  border: 3px solid rgba(53, 32, 111, 0.12);
+  border-radius: var(--kg-radius);
+  padding: 16px 20px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--kg-morado);
+  cursor: pointer;
+  box-shadow: 0 5px 0px rgba(53, 32, 111, 0.1);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.option-btn:hover {
+  border-color: var(--kg-amarillo-dark);
+  background: var(--kg-amarillo-light);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0px rgba(53, 32, 111, 0.15);
+}
+
+.option-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0px rgba(53, 32, 111, 0.1);
+}
+
+.option-btn.correct {
+  background: var(--kg-verde);
+  color: var(--kg-white);
+  border-color: var(--kg-verde-dark);
+  box-shadow: 0 6px 0px var(--kg-verde-dark);
+  animation: bounceCorrect 0.5s ease;
+}
+
+.option-btn.wrong {
+  background: var(--kg-rojo);
+  color: var(--kg-white);
+  border-color: #d63031;
+  box-shadow: 0 6px 0px #b71c1c;
+  animation: shakeWrong 0.4s ease;
+}
+
+@keyframes bounceCorrect {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shakeWrong {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Entrada numérica directa */
+.num-input-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.num-input-box {
+  width: 120px;
+  height: 64px;
+  border-radius: var(--kg-radius);
+  border: 3px solid var(--kg-morado);
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--kg-morado);
+  background: var(--kg-white);
+  outline: none;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.num-input-box:focus {
+  border-color: var(--kg-verde);
+  box-shadow: 0 0 0 4px rgba(122, 201, 67, 0.25);
+}
+
+/* Pantalla de Victoria / Misión Completada */
+.victory-screen {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: popVictory 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popVictory {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.victory-badge-dino {
+  font-size: 80px;
+  animation: jumpDino 1.5s infinite ease-in-out;
+}
+
+@keyframes jumpDino {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(6deg); }
+}
+
+.victory-title {
+  font-size: 32px;
+  color: var(--kg-verde-dark);
+  font-weight: 700;
+}
+
+.victory-reward-box {
+  background: var(--kg-amarillo-light);
+  border: 3px dashed var(--kg-amarillo-dark);
+  border-radius: var(--kg-radius);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.reward-sticker {
+  font-size: 44px;
+}
+
+.reward-details {
+  text-align: left;
+}
+
+.reward-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--kg-amarillo-dark);
+}
+
+.reward-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--kg-morado);
+}
+
+/* Confeti canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 3000;
+}

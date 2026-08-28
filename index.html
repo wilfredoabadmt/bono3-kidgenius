@@ -3,126 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>KidGenius Club — Bono 2: Rompecabezas & Puzzles Didácticos</title>
-  <meta name="description" content="KidGenius Club Bono 2: Rompecabezas interactivos, puzzles de lógica matemática y tangram de dinosaurios para niños de 6 a 12 años con Geni, Dino y sus amigos." />
+  <title>KidGenius Club — Bono #3: Calendario de Aventuras Matemáticas (30 Días)</title>
+  <meta name="description" content="Bono #3 oficial de KidGenius Club: Calendario imprimible e interactivo de 30 días con misiones matemáticas diarias guiadas por Geni." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦖</text></svg>">
 
-  <!-- Google Fonts: Fredoka & Nunito (Exact same typography as Math Dino & KidGenius Club) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS CDN for speedy responsive layout -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-  <!-- Custom KidGenius Club Design System -->
+  <!-- Estilos del Sistema KidGenius Club -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/calendar.css" />
+  <link rel="stylesheet" href="css/missions.css" />
+  <link rel="stylesheet" href="css/print.css" />
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-yellow-300 selection:text-purple-950">
+<body>
 
-  <!-- Background Floating Visuals -->
-  <div class="bg-decorations">
-    <div class="floating-star text-3xl" style="top: 10%; left: 8%;">⭐</div>
-    <div class="floating-star text-4xl" style="top: 25%; right: 12%; animation-delay: -3s;">✨</div>
-    <div class="floating-star text-2xl" style="top: 75%; left: 15%; animation-delay: -7s;">🌟</div>
-    <div class="floating-star text-3xl" style="top: 80%; right: 10%; animation-delay: -5s;">🦕</div>
-    <div class="floating-star text-2xl" style="top: 50%; left: 4%; animation-delay: -2s;">🦖</div>
-    <div class="floating-star text-3xl" style="top: 45%; right: 4%; animation-delay: -9s;">🌴</div>
+  <!-- Barra de Bono Exclusivo -->
+  <div class="top-bonus-bar">
+    <span class="badge">🎁 Bono #3 Incluido</span>
+    <span>Calendario de Aventuras de 30 Días · ¡Desafíos diarios con Geni!</span>
   </div>
 
-  <!-- Header Navigation Bar -->
-  <header class="relative z-30 w-full px-4 py-3 bg-purple-950/80 backdrop-blur-md border-b-2 border-purple-800/60 shadow-xl">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
-      
-      <!-- Brand Logo & Home Button -->
-      <button id="btnHomeMap" class="flex items-center gap-2 sm:gap-3 cursor-pointer group text-left border-none bg-transparent p-0">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-green-500 to-yellow-300 flex items-center justify-center text-2xl shadow-lg transform group-hover:scale-105 transition-transform">
-          🦖
-        </div>
+  <!-- Header de Navegación -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-logo" onclick="switchTab('calendar')">
+        <div class="dino-icon">🦖</div>
         <div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-xs uppercase tracking-widest font-black text-yellow-300 font-heading">KIDGENIUS CLUB</span>
-            <span class="text-[10px] bg-pink-600 text-white px-2 py-0.2 rounded-full font-black">BONO 2</span>
-          </div>
-          <h1 class="text-base sm:text-xl font-black text-white font-heading leading-none">
-            Dino Puzzles & Rompecabezas
-          </h1>
+          <span class="logo-kid">Kid</span><span class="logo-genius">Genius</span> <span class="logo-club">Club</span>
         </div>
-      </button>
+      </div>
 
-      <!-- Stats Bar (Stars, Coins, Avatar, Audio) -->
-      <div class="flex items-center gap-2 sm:gap-4">
-        
-        <!-- Stars Counter -->
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 font-heading shadow-inner">
-          <span class="text-base sm:text-lg">⭐</span>
-          <span id="headerStars" class="text-sm sm:text-base font-black">0</span>
+      <!-- Pestañas de Navegación -->
+      <div class="nav-tabs">
+        <button class="nav-tab-btn active" data-tab="calendar">
+          <span>📅</span> Calendario 30 Días
+        </button>
+        <button class="nav-tab-btn" data-tab="print">
+          <span>🖨️</span> Centro de Impresión
+        </button>
+        <button class="nav-tab-btn" data-tab="diploma">
+          <span>🏆</span> Diploma de Honor
+        </button>
+      </div>
+
+      <!-- Acciones de Usuario -->
+      <div class="header-actions">
+        <div class="profile-pill" onclick="openProfileModal()" title="Cambiar Nombre o Avatar">
+          <div class="profile-avatar" id="header-avatar-icon">🦖</div>
+          <span class="profile-name" id="header-profile-name">Pequeño Genio</span>
         </div>
 
-        <!-- Coins Counter -->
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-orange-400/20 border border-orange-400/40 text-orange-300 font-heading shadow-inner">
-          <span class="text-base sm:text-lg">🪙</span>
-          <span id="headerCoins" class="text-sm sm:text-base font-black">0</span>
-        </div>
-
-        <!-- Active Avatar Widget -->
-        <button id="btnOpenAvatar" title="Cambiar Mascota y Voz" class="flex items-center gap-2 px-2.5 py-1.5 rounded-2xl bg-purple-800/80 hover:bg-purple-700/90 border border-purple-600 transition-all cursor-pointer shadow-md">
-          <div id="headerAvatarIcon" class="w-8 h-8 rounded-full overflow-hidden bg-purple-900 flex items-center justify-center">
-            🌟
-          </div>
-          <span id="headerChildName" class="text-xs font-black text-white hidden md:inline font-heading max-w-[90px] truncate">
-            Campeón
-          </span>
+        <button class="btn-icon-toggle" id="sound-toggle-btn" onclick="toggleAudio()" title="Activar/Silenciar Sonido">
+          🔊
         </button>
 
-        <!-- Sound & Music Toggles -->
-        <div class="flex items-center gap-1">
-          <button id="btnToggleSound" title="Efectos de Sonido" class="w-9 h-9 rounded-xl bg-purple-900/80 hover:bg-purple-800 text-white flex items-center justify-center transition-colors shadow-inner border border-purple-700 cursor-pointer">
-            <span class="icon text-sm">🔊</span>
-          </button>
-          <button id="btnToggleMusic" title="Música de Fondo" class="w-9 h-9 rounded-xl bg-purple-900/80 hover:bg-purple-800 text-white flex items-center justify-center transition-colors shadow-inner border border-purple-700 cursor-pointer">
-            <span class="icon text-sm">🎵</span>
-          </button>
-        </div>
-
-        <!-- Math Dino App Link -->
-        <a href="https://mathdino.89.116.29.168.sslip.io/" target="_blank" rel="noopener noreferrer" title="Ir a la App Principal Math Dino" class="btn-kg btn-kg-green text-xs py-1.5 px-3 hidden lg:flex">
-          <span>🦖</span> Math Dino
-        </a>
+        <button class="btn-icon-toggle" onclick="openParentsModal()" title="Guía para Padres">
+          💡
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Main View Router Container -->
-  <main id="appMainView" class="relative z-10 flex-1 flex flex-col items-center justify-center p-4 sm:p-6 w-full max-w-6xl mx-auto my-4">
-    <!-- Dynamic World Map or Active Game loads here -->
-    <div class="flex flex-col items-center justify-center text-center p-12 text-white animate-pulse">
-      <span class="text-5xl mb-3">🦖</span>
-      <p class="text-lg font-bold font-heading">Cargando el Valle de Rompecabezas KidGenius...</p>
-    </div>
+  <!-- Contenedor Principal de la App -->
+  <main class="main-wrapper">
+
+    <!-- ================= TAB 1: CALENDARIO DE AVENTURAS ================= -->
+    <section id="view-calendar" class="tab-view active-view">
+      <!-- Hero de Aventura -->
+      <div class="adventure-hero">
+        <div>
+          <span class="hero-tag-badge">🦖 Aventura Matemática Diaria</span>
+          <h1>¡30 Días de <span class="highlight">Misiones Geniales</span>!</h1>
+          <p class="hero-subtitle">
+            Completa un reto cada día, gana gemas mágicas y desbloquea stickers coleccionables para graduarte como Maestro KidGenius.
+          </p>
+
+          <div class="hero-stats-bar">
+            <div class="stat-item">
+              <div class="stat-icon flame">🔥</div>
+              <div class="stat-info">
+                <div class="stat-num" id="hero-streak-count">1 día</div>
+                <div class="stat-label">Racha Activa</div>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon star">⭐</div>
+              <div class="stat-info">
+                <div class="stat-num" id="hero-stars-count">0 ⭐</div>
+                <div class="stat-label">Estrellas</div>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <div class="stat-icon flag">🚩</div>
+              <div class="stat-info">
+                <div class="stat-num" id="hero-days-count">0 / 30</div>
+                <div class="stat-label">Días Superados</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Geni el Compañero -->
+        <div class="geni-companion-card">
+          <div class="geni-speech-bubble" id="geni-hero-quote">
+            ¡Hola! Soy Geni. Toca el Día 1 para comenzar nuestra primera expedición prehistórica.
+          </div>
+          <div class="geni-character-display" onclick="window.soundEngine.playPop()">🦖</div>
+          <div class="geni-actions">
+            <button class="btn-kg btn-kg-yellow" onclick="window.printManager.printCalendar()">
+              <span>🖨️</span> Imprimir Calendario
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tablero del Calendario Interactivo -->
+      <div id="calendar-view-container" class="calendar-section">
+        <!-- Renderizado dinámico vía calendar-ui.js -->
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: CENTRO DE IMPRESIÓN ================= -->
+    <section id="view-print" class="tab-view">
+      <div class="print-hub-section">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 10px auto;">
+          <h2 style="font-size: 32px; color: var(--kg-morado); margin-bottom: 8px;">🖨️ Centro de Impresión KidGenius</h2>
+          <p style="font-size: 16px; color: var(--kg-gray); font-weight: 600;">
+            Imprime tus materiales en casa en alta resolución para tener una experiencia física divertida en la nevera o pared de la habitación.
+          </p>
+        </div>
+
+        <div class="print-options-grid">
+          <!-- Opción 1: Calendario A4 Horizontal -->
+          <div class="print-card">
+            <div>
+              <div class="print-card-header">
+                <div class="print-icon-wrap" style="background: var(--kg-verde-light); color: var(--kg-verde-dark);">📅</div>
+                <div>
+                  <h3 class="print-card-title">Calendario 30 Días Póster</h3>
+                  <span style="font-size: 13px; font-weight: 700; color: var(--kg-verde-dark);">Formato Horizontal A4 / Carta</span>
+                </div>
+              </div>
+              <p class="print-card-desc" style="margin-top: 14px;">
+                Póster con los 30 casilleros y círculos de chequeo para marcar con lápiz o pegar stickers reales cada día que tu hijo complete la misión.
+              </p>
+            </div>
+            <button class="btn-kg btn-kg-primary" onclick="window.printManager.printCalendar()">
+              <span>🖨️</span> Imprimir Calendario
+            </button>
+          </div>
+
+          <!-- Opción 2: Diploma Oficial de Superación -->
+          <div class="print-card">
+            <div>
+              <div class="print-card-header">
+                <div class="print-icon-wrap" style="background: var(--kg-amarillo-light); color: var(--kg-amarillo-dark);">🏆</div>
+                <div>
+                  <h3 class="print-card-title">Diploma Oficial de Honor</h3>
+                  <span style="font-size: 13px; font-weight: 700; color: var(--kg-amarillo-dark);">Certificado de Graduación</span>
+                </div>
+              </div>
+              <p class="print-card-desc" style="margin-top: 14px;">
+                Certificado personalizado con el nombre del niño y la firma de Geni para premiar el esfuerzo y la constancia de los 30 días.
+              </p>
+            </div>
+            <button class="btn-kg btn-kg-yellow" onclick="window.diplomaManager.printDiploma()">
+              <span>🖨️</span> Imprimir Diploma
+            </button>
+          </div>
+        </div>
+
+        <!-- Vista previa del calendario imprimible -->
+        <div class="challenge-progress-card" style="margin-top: 10px;">
+          <h3 style="font-size: 20px; color: var(--kg-morado); margin-bottom: 12px;">👀 Vista Previa del Calendario Físico</h3>
+          <div id="printable-calendar-element" class="printable-calendar-template" style="display: block;">
+            <!-- Renderizado dinámico vía print-manager.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: DIPLOMA DE HONOR ================= -->
+    <section id="view-diploma" class="tab-view">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 20px auto;">
+        <h2 style="font-size: 32px; color: var(--kg-morado); margin-bottom: 8px;">🏆 Diploma de Honor KidGenius</h2>
+        <p style="font-size: 16px; color: var(--kg-gray); font-weight: 600;">
+          Al completar los 30 días, entrega este reconocimiento a tu pequeño para celebrar su triunfo.
+        </p>
+        <button class="btn-kg btn-kg-yellow" style="margin-top: 16px;" onclick="window.diplomaManager.printDiploma()">
+          <span>🖨️</span> Imprimir o Guardar PDF
+        </button>
+      </div>
+
+      <div id="diploma-preview-container">
+        <!-- Renderizado dinámico vía diploma.js -->
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer Banner -->
-  <footer class="relative z-20 w-full py-3 px-4 bg-purple-950/90 border-t border-purple-800/40 text-center">
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-purple-300 font-nunito font-bold">
-      <div class="flex items-center gap-2">
-        <span>🎁 Bono 2 Oficial KidGenius Club</span>
-        <span class="hidden sm:inline">•</span>
-        <span class="text-yellow-300">Rompecabezas • Agilidad Mental • Diplomas</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://mathdino.89.116.29.168.sslip.io/" target="_blank" rel="noopener noreferrer" class="hover:text-yellow-300 transition-colors">
-          App Math Dino ↗
-        </a>
-        <span>•</span>
-        <span>© 2026 KidGenius Club. Todos los derechos reservados.</span>
+  <!-- ================= MODAL: MISIÓN DIARIA INTERACTIVA ================= -->
+  <div class="modal-overlay" id="mission-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="window.missionRunner.closeMission()">✕</button>
+      <div id="mission-modal-body">
+        <!-- Inyectado por mission-runner.js -->
       </div>
     </div>
+  </div>
+
+  <!-- ================= MODAL: PERFIL DEL NIÑO / AVATAR ================= -->
+  <div class="modal-overlay" id="profile-modal">
+    <div class="modal-content" style="max-width: 480px; text-align: center;">
+      <button class="modal-close-btn" onclick="closeProfileModal()">✕</button>
+      <h2 style="font-size: 26px; color: var(--kg-morado); margin-bottom: 6px;">🦖 Perfil del Explorador</h2>
+      <p style="font-size: 14px; color: var(--kg-gray); font-weight: 600; margin-bottom: 20px;">
+        Personaliza tu nombre y elige a tu compañero dinosaurio favorito.
+      </p>
+
+      <div style="margin-bottom: 20px; text-align: left;">
+        <label style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--kg-morado); display: block; margin-bottom: 6px;">
+          Nombre del Niño/a:
+        </label>
+        <input type="text" id="profile-name-input" class="num-input-box" style="width: 100%; height: 50px; text-align: left; padding: 0 16px; font-size: 18px;" placeholder="Ej: Mateo, Sofía, Leo..." />
+      </div>
+
+      <label style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--kg-morado); display: block; margin-bottom: 10px; text-align: left;">
+        Elige tu Mascota Dino:
+      </label>
+      <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 24px;">
+        <button class="btn-icon-toggle avatar-option" onclick="selectAvatar('🦖')" style="font-size: 26px; width: 52px; height: 52px;">🦖</button>
+        <button class="btn-icon-toggle avatar-option" onclick="selectAvatar('🦕')" style="font-size: 26px; width: 52px; height: 52px;">🦕</button>
+        <button class="btn-icon-toggle avatar-option" onclick="selectAvatar('🐊')" style="font-size: 26px; width: 52px; height: 52px;">🐊</button>
+        <button class="btn-icon-toggle avatar-option" onclick="selectAvatar('🦎')" style="font-size: 26px; width: 52px; height: 52px;">🦎</button>
+        <button class="btn-icon-toggle avatar-option" onclick="selectAvatar('🦤')" style="font-size: 26px; width: 52px; height: 52px;">🦤</button>
+      </div>
+
+      <button class="btn-kg btn-kg-primary" style="width: 100%;" onclick="saveProfile()">
+        Guardar Perfil 💾
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: GUÍA DE ACOMPAÑAMIENTO "SIN PELEAS" ================= -->
+  <div class="modal-overlay" id="parents-modal">
+    <div class="modal-content" style="max-width: 580px;">
+      <button class="modal-close-btn" onclick="closeParentsModal()">✕</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span style="font-size: 40px;">💡</span>
+        <h2 style="font-size: 26px; color: var(--kg-morado); margin-top: 6px;">Guía para Padres: Método KidGenius</h2>
+        <p style="font-size: 14px; font-weight: 700; color: var(--kg-verde-dark);">Cómo lograr 30 días de práctica con sonrisa</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 15px; color: var(--kg-ink); line-height: 1.5;">
+        <div style="background: var(--kg-verde-light); padding: 14px; border-radius: var(--kg-radius-sm); border-left: 4px solid var(--kg-verde);">
+          <strong>1. Solo 5 minutos al día:</strong> No alargues la sesión. La clave pedagógica es la constancia breve y divertida, no el agotamiento.
+        </div>
+        <div style="background: var(--kg-amarillo-light); padding: 14px; border-radius: var(--kg-radius-sm); border-left: 4px solid var(--kg-amarillo-dark);">
+          <strong>2. Frase mágica recomendada:</strong> <em>"¡Mira qué reto tan curioso preparó Geni hoy! ¿Lo resolvemos juntos?"</em>
+        </div>
+        <div style="background: var(--kg-azul-light); padding: 14px; border-radius: var(--kg-radius-sm); border-left: 4px solid var(--kg-azul-dark);">
+          <strong>3. Celebra el intento:</strong> Si se equivoca, di: <em>"¡Casi! Probemos otra estrategia de detective"</em> en lugar de marcar el error.
+        </div>
+        <div style="background: var(--kg-naranja-light); padding: 14px; border-radius: var(--kg-radius-sm); border-left: 4px solid var(--kg-naranja);">
+          <strong>4. Usa el calendario físico:</strong> Colócalo en la nevera y deja que tu hijo sea el encargado exclusivo de marcar su día.
+        </div>
+      </div>
+
+      <button class="btn-kg btn-kg-purple" style="width: 100%; margin-top: 20px;" onclick="closeParentsModal()">
+        ¡Entendido, gracias! ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor de Toasts -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Canvas de Confeti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Footer Oficial -->
+  <footer class="app-footer">
+    <div class="footer-brand">🦖 KidGenius Club</div>
+    <p>© 2026 KidGenius Club · Bono #3 Exclusivo · Desarrollado con ❤️ para familias que practican con sonrisa.</p>
   </footer>
 
-  <!-- Dynamic Modal Overlay Container -->
-  <div id="modalContainer"></div>
-
-  <!-- JavaScript ES Modules -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Scripts de la Aplicación -->
+  <script src="js/audio.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/missions-data.js"></script>
+  <script src="js/mission-runner.js"></script>
+  <script src="js/calendar-ui.js"></script>
+  <script src="js/diploma.js"></script>
+  <script src="js/print-manager.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
